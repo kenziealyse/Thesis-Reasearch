@@ -13,6 +13,6 @@ xlabel('Time')
 title('Max Myosin Levels Over Time for', str)
 
 
-edit this bad boih
+hello
 
 end
