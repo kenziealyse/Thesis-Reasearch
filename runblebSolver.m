@@ -70,8 +70,12 @@ legend('GBG', 'GBPC', 'MCOR', 'RasB', 'MHCKA','location','southeast')
 if savefigure == 1
     
     Date = datestr(now, 'dd-mmm-yyyy'); % Get current date
-   
-    mkdir(Date); % Make a Directory with the Current Date
+    
+    if ~exist(Date, 'dir')
+        
+       mkdir(Date) % Make a Directory with the Current Date if it does not already exist
+       
+    end
     
     dirPath = strcat('/',Date, '\tester.jpg'); % Directory Path
     
