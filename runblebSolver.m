@@ -69,15 +69,19 @@ legend('GBG', 'GBPC', 'MCOR', 'RasB', 'MHCKA','location','southeast')
 
 if savefigure == 1
     
-    Date = datestr(now, 'dd-mmm-yyyy'); % Get current date
+    DateDay = datestr(now, 'dd-mmm-yyyy'); % Get current date
     
-    if ~exist(Date, 'dir')
+    DateTime = datestr(now, 'HH:MM:SS'); % Get current time
+    
+    if ~exist(DateDay, 'dir')
         
-       mkdir(Date) % Make a Directory with the Current Date if it does not already exist
+       mkdir(DateDay) % Make a Directory with the Current Date if it does not already exist
        
     end
     
-    dirPath = strcat('/',Date, '\tester.jpg'); % Directory Path
+    fileName = strcat('/Figure', DateTime ,'.jpg'); % Name figure file name based on current time
+    
+    dirPath = strcat('/',DateDay, fileName); % Directory Path
     
     saveas(figure(1),[pwd dirPath]); % Save Figure in Folder
   
