@@ -1,3 +1,3 @@
-# Thesis-Reasearch
+# Thesis-Research
 
 test

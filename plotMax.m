@@ -12,9 +12,4 @@ ylabel('Fluoresence (AU)')
 xlabel('Time')
 title('Max Myosin Levels Over Time for', str)
 
-
-hello
-
-chqnge
-
 end
