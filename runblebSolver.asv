@@ -54,7 +54,9 @@ steady_state_table = table(y(end,1),y(end,2),y(end,3),y(end,4),y(end,5), 'Variab
 
 % Plot solutions
 
-timeSeriesPlot = plot(T,y, 'linewidth', 2)
+figure(1)
+
+plot(T,y, 'linewidth', 2)
 
 title("Time Versus Concentrations", 'FontSize', 20)
 xlabel("Time (Seconds)",'FontSize', 17)
@@ -62,13 +64,21 @@ ylabel("Concentrations",'FontSize', 17)
 
 legend('GBG', 'GBPC', 'MCOR', 'RasB', 'MHCKA','location','southeast')
 
-% Save Time Series Plot as JPG File with Time and Date in a Folder with the
+% Save Time Series Plot as JPG File in a Folder with the
 % Date
 
 if savefigure == 1
     
-    FileName=['Thesis-figures',datestr(now, 'dd-mmm-yyyy'),'timeseriesplot.jpg'];
+    Date = datestr(now, 'dd-mmm-yyyy')
+   
+    mkdir(Date)
     
-    saveas(jpg, [pwd '/FileName/myFig.fig'], 'tester.jpg');
+    savdir = 'C:\Users\Kenz\Documents\MATLAB\Thesis/Resarch';
+    
+    save(fullfile(savdir,Date),'tes');
+    
+    saveas(1, 'tester.jpg');
+    
+    movefile tester.m Date
 
 end

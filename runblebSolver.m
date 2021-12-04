@@ -69,12 +69,13 @@ legend('GBG', 'GBPC', 'MCOR', 'RasB', 'MHCKA','location','southeast')
 
 if savefigure == 1
     
-    Date = datestr(now, 'dd-mmm-yyyy')
+    Date = datestr(now, 'dd-mmm-yyyy'); % Get current date
    
-    mkdir(Date)
+    mkdir(Date); % Make a Directory with the Current Date
     
-    saveas(1, 'tester.jpg');
+    dirPath = strcat('/',Date, '\tester.jpg'); % Directory Path
     
-    movefile tester.m Date
+    saveas(figure(1),[pwd dirPath]); % Save Figure in Folder
+  
 
 end
