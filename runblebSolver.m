@@ -1,7 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % File to Run Ode Solver using the blebSolver
-%Declares variables, solves ODE, plots and saves
-%time plot figures
+%Declares variables, solves ODE
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -45,45 +44,3 @@ init_cond = [.5 0 0 0 0];
 
 [T,y] = ode45(@(t,Y) blebSolver(t,Y,R,params) , tspan ,...
     init_cond);
-
-% Steady State Solutions
-
-VarNames = {'GBG Steady State', 'GBPC Steady State', 'MCOR Steady State',...
-    'RASB Steady State', 'MHCKA Steady State'};
-steady_state_table = table(y(end,1),y(end,2),y(end,3),y(end,4),y(end,5), 'VariableNames',VarNames)
-
-% Plot solutions
-
-figure(1)
-
-plot(T,y, 'linewidth', 2)
-
-title("Time Versus Concentrations", 'FontSize', 20)
-xlabel("Time (Seconds)",'FontSize', 17)
-ylabel("Concentrations",'FontSize', 17)
-
-legend('GBG', 'GBPC', 'MCOR', 'RasB', 'MHCKA','location','southeast')
-
-% Save Time Series Plot as JPG File in a Folder with the
-% Date
-
-if savefigure == 1
-    
-    DateDay = datestr(now, 'dd-mmm-yyyy'); % Get current date
-    
-    DateTime = datestr(now, 'HH:MM:SS'); % Get current time
-    
-    if ~exist(DateDay, 'dir')
-        
-       mkdir(DateDay) % Make a Directory with the Current Date if it does not already exist
-       
-    end
-    
-    fileName = strcat('/Figure', DateTime ,'.jpg'); % Name figure file name based on current time
-    
-    dirPath = strcat('/',DateDay, fileName); % Directory Path
-    
-    saveas(figure(1),[pwd dirPath]); % Save Figure in Folder
-  
-
-end

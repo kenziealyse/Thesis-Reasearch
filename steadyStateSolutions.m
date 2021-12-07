@@ -1,6 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % File to Run Ode Solver and look at the steady states
-%
+% when changing variables
+% Varaible changed: R0
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -11,7 +12,7 @@ clear all
 
 % Set paramets values
 
-R = .5;          % Initial active receptors 
+R = (0:.1:1);          % Initial active receptors 
 alpha1 = 1/10;   % GBgamma
 alpha2 = 1/12;   % GBPC
 alpha3 = 1/9;    % MCOR
@@ -39,13 +40,29 @@ tspan = [0 120];
 
 init_cond = [.5 0 0 0 0];
 
-% Run Ode Solver
+% Pre-allocate Space in SSsolns vector
 
-[T,y] = ode45(@(t,Y) blebSolver(t,Y,R,params) , tspan ,...
+SSsolns = zeros(length(R), length(init_cond));
+
+% Run Ode Solver in loop for various R0 values
+
+for i = 1:length(R)
+    
+    [T,y] = ode45(@(t,Y) blebSolver(t,Y,R(i),params) , tspan ,...
     init_cond);
 
-% Steady State Solutions
+    % Save Steady State Solutions 
 
-VarNames = {'GBG Steady State', 'GBPC Steady State', 'MCOR Steady State',...
-    'RASB Steady State', 'MHCKA Steady State'};
-steady_state_table = table(y(end,1),y(end,2),y(end,3),y(end,4),y(end,5), 'VariableNames',VarNames)
+    
+    SSsolns(i, :) = y(end); 
+
+
+end
+
+VarNames = {'R_0', 'GBG Steady State', 'GBPC Steady State', 'MCOR Steady State',...
+        'RASB Steady State', 'MHCKA Steady State'};
+
+steady_state_table = table(R', SSsolns(:,1),SSsolns(:,2),SSsolns(:,3)...
+    ,SSsolns(:,4),SSsolns(:,5), 'VariableNames',VarNames)
+
+
