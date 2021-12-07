@@ -11,7 +11,7 @@ clear all
 
 % Set paramets values
 
-R = .5;          % Initial active receptors 
+R = 0.8;          % Initial active receptors 
 alpha1 = 1/10;   % GBgamma
 alpha2 = 1/12;   % GBPC
 alpha3 = 1/9;    % MCOR
@@ -33,7 +33,7 @@ params = [alpha1, alpha2, alpha3, alpha4, alpha5, ...
 
 % Set time span
 
-tspan = [0 120];
+tspan = [0 1200];
 
 % Set initial conditions
 
