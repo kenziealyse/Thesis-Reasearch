@@ -5,7 +5,7 @@ function  dY_dt = blebSolverSteadyStates(~,Y,R,params)
 %equations
 
 
-% Set alpha paramets
+% Set k plus paramets
 
 k1plus = params(1);
 k2plus = params(2);

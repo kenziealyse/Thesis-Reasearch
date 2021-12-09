@@ -5,22 +5,22 @@ function  dY_dt = blebSolver(~,Y,R,params)
 %equations
 
 
-% Set alpha paramets
+% Set k plus paramets
 
-alpha1 = params(1);
-alpha2 = params(2);
-alpha3 = params(3);
-alpha4 = params(4);
-alpha5 = params(5);
+k1plus = params(1);
+k2plus = params(2);
+k3plus = params(3);
+k4plus = params(4);
+k5plus = params(5);
 
 
 % Set K minus parameters
 
-k1 = params(6);
-k2 = params(7);
-k3 = params(8);
-k4 = params(9);
-k5 = params(10);
+k1minus = params(6);
+k2minus = params(7);
+k3minus = params(8);
+k4minus = params(9);
+k5minus = params(10);
 
 
 % Relabel to easily keep track of compartments
