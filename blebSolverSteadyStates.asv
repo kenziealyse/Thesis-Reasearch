@@ -33,8 +33,8 @@ MHCKA = Y(5);
 dGBG_dt = (k1plus*R)/(k1plus*R+k1minus);          % Steady State eq (G beta gamma)
 dGBPC_dt =  (k2plus*GBG)/(k2plus*GBG+k2minus);  % Steady State eq (GBPC)
 dMCOR_dt =  (k3plus*GBG)/(k3plus*GBPC+k3minus*MHCKA);  % Steady State eq (XMCOR)
-dRASB_dt =  (k4plus*GBG)/(k4plus*GBG-k4minus);  % Steady State eq (RASB)
-dMHCKA_dt = (k5plus*RASB)/(k5plus*RASB-k5minus);  % Steady State eq (XMCHKA)
+dRASB_dt =  (k4plus*GBG)/(k4plus*GBG-k4minus);  %eq (RASB)
+dMHCKA_dt = (k5plus*RASB)/(k5plus*RASB-k5minus);  %eq (XMCHKA)
 
 dY_dt = [dGBG_dt; dGBPC_dt; dMCOR_dt; dRASB_dt; dMHCKA_dt];
 
