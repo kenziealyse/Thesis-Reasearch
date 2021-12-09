@@ -38,11 +38,11 @@ tspan = [0 1200];
 
 % Set initial conditions
 
-init_cond = [.5 0 0 0 0];
+init_cond = [0.5 0.5 0.5 0.5 0.5];
 
 % Run Ode Solver
 
-[T,y] = ode45(@(t,Y) blebSolver(t,Y,R,params) , tspan ,...
+[T,y] = ode45(@(t,Y) blebSolverSteadyStates(t,Y,R,params) , tspan ,...
     init_cond);
 
 
