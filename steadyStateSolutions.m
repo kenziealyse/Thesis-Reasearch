@@ -13,24 +13,24 @@ clear all
 % Set paramets values
 
 R = (0:.1:1);          % Initial active receptors 
-alpha1 = 1/10;   % GBgamma
-alpha2 = 1/12;   % GBPC
-alpha3 = 1/9;    % MCOR
-alpha4 = 1/16;   % RasB
-alpha5 = 1/11;   % MHCKA
+k1plus = 1/10;   % GBgamma
+k2plus = 1/12;   % GBPC
+k3plus = 1/9;    % MCOR
+k4plus = 1/16;   % RasB
+k5plus = 1/11;   % MHCKA
 
-k1 = 1/120;    % GBgamma  
-k2 = 1/130;    % GBPC
-k3 = 1/145;    % MCOR
-k4 = 1/160;    % RasB
-k5 = 1/115;    % MHCKA
+k1minus = 1/120;    % GBgamma  
+k2minus = 1/130;    % GBPC
+k3minus = 1/145;    % MCOR
+k4minus = 1/160;    % RasB
+k5minus = 1/115;    % MHCKA
 
 savefigure = 1; % Set 1 if want to save figure and set 0 if do not want to save figure
 
 % Put parameter values into vector
 
-params = [alpha1, alpha2, alpha3, alpha4, alpha5, ...
-    k1, k2, k3, k4, k5];
+params = [k1plus, k2plus, k3plus, k4plus, k5plus, ...
+    k1minus, k2minus, k3minus, k4minus, k5minus];
 
 % Set time span
 
@@ -58,6 +58,8 @@ for i = 1:length(R)
 
 
 end
+
+T(end)
 
 VarNames = {'R_0', 'GBG Steady State', 'GBPC Steady State', 'MCOR Steady State',...
         'RASB Steady State', 'MHCKA Steady State'};

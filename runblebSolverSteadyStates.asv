@@ -28,8 +28,7 @@ k5minus = 1/115;    % MHCKA
 
 k5plus = 1/11;   % MHCKA
 a = 0.5;
-tSteadyState = 100;
-k5plus_fun = @(t) kfiveplus(t, k5plus, a, tSteadyState);
+k5plus_fun = @(t) pulse_vR_fun(t, k5plus, a, tSteadyState);
 
 % Steady State Solutions
 
@@ -41,7 +40,8 @@ savefigure = 0; % Set 1 if want to save figure and set 0 if do not want to save 
 
 % Put parameter values into vector
 
-params = [k3plus, k3minus, k5minus];
+params = [k3plus,
+ k1minus, k2minus, k3minus, k4minus, k5minus];
 
 % Set time span
 
@@ -53,7 +53,7 @@ init_cond = [0.5 0.5];
 
 % Run Ode Solver
 
-[T,y] = ode45(@(t,Y) blebSolverSteadyStates(t,Y, k5plus_fun, params, GBG, GBPC, RASB) , tspan ,...
+[T,y] = ode45(@(t,Y) blebSolverSteadyStates(t,Y,R,params, k5plus_fun, GBG, GBPC, RASB) , tspan ,...
     init_cond);
 
 

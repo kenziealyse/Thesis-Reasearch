@@ -30,11 +30,11 @@ MCOR = Y(3);
 RASB = Y(4);
 MHCKA = Y(5);
 
-dGBG_dt = alpha1*R*(1-GBG)- k1*GBG;          %eq (G beta gamma)
-dGBPC_dt =  alpha2*GBG*(1-GBPC)-k2*GBPC;  %eq (GBPC)
-dMCOR_dt =  alpha3*GBPC*(1-MCOR)-k3*MCOR*MHCKA;  %eq (XMCOR)
-dRASB_dt =  alpha4*GBG*(1-RASB)-k4*RASB;  %eq (RASB)
-dMHCKA_dt = alpha5*RASB*(1-MHCKA)-k5*MHCKA;  %eq (XMCHKA)
+dGBG_dt = k1plus*R*(1-GBG)- k1minus*GBG;          %eq (G beta gamma)
+dGBPC_dt =  k2plus*GBG*(1-GBPC)-k2minus*GBPC;  %eq (GBPC)
+dMCOR_dt =  k3plus*GBPC*(1-MCOR)-k3minus*MCOR*MHCKA;  %eq (XMCOR)
+dRASB_dt =  k4plus*GBG*(1-RASB)-k4minus*RASB;  %eq (RASB)
+dMHCKA_dt = k5plus*RASB*(1-MHCKA)-k5minus*MHCKA;  %eq (XMCHKA)
 
 dY_dt = [dGBG_dt; dGBPC_dt; dMCOR_dt; dRASB_dt; dMHCKA_dt];
 
