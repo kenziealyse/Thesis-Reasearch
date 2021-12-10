@@ -39,3 +39,11 @@ dMHCKA_dt = k5plus*RASB*(1-MHCKA)-k5minus*MHCKA;  %eq (XMCHKA)
 dY_dt = [dGBG_dt; dGBPC_dt; dMCOR_dt; dRASB_dt; dMHCKA_dt];
 
 end
+
+function [value,isterminal,direction] = event(~,Y)
+
+value      = Y(1) - ; 
+isterminal = 1;   % HALT INTEGRATION WHEN I1a+I2 = 0.05
+direction  = 0;
+
+end

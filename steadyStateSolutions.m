@@ -44,6 +44,10 @@ init_cond = [.5 0 0 0 0];
 
 SSsolns = zeros(length(R), length(init_cond));
 
+% Declare Event Function
+
+ Opt = odeset('Events', @event);
+
 % Run Ode Solver in loop for various R0 values
 
 for i = 1:length(R)
@@ -58,8 +62,6 @@ for i = 1:length(R)
 
 
 end
-
-T(end)
 
 VarNames = {'R_0', 'GBG Steady State', 'GBPC Steady State', 'MCOR Steady State',...
         'RASB Steady State', 'MHCKA Steady State'};
