@@ -10,6 +10,10 @@
 close all
 clear all
 
+% Set 1 if want to save figure and set 0 if do not want to save figure
+
+savefigure = 0; 
+
 % Set paramets values
 
 R = 0.8;          % Initial active receptors 
@@ -37,7 +41,6 @@ GBG = (k1plus*R)/(k1plus*R+k1minus);   % Steady State eq (G beta gamma)
 GBPC =  (k2plus*GBG)/(k2plus*GBG+k2minus);  % Steady State eq (GBPC)
 RASB =  (k4plus*GBG)/(k4plus*GBG-k4minus);  % Steady State eq (RASB)
 
-savefigure = 0; % Set 1 if want to save figure and set 0 if do not want to save figure
 
 % Put parameter values into vector
 
