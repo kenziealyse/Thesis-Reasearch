@@ -25,6 +25,12 @@ k3 = 1/145;    % MCOR
 k4 = 1/160;    % RasB
 k5 = 1/115;    % MHCKA
 
+k5plus = 1/11;   % MHCKA
+a = .001;
+tSteadyState = 100;
+k5plus_fun = @(t) kfiveplus(t, k5plus, a, tSteadyState);
+
+
 savefigure = 1; % Set 1 if want to save figure and set 0 if do not want to save figure
 
 % Put parameter values into vector
@@ -42,5 +48,5 @@ init_cond = [.5 0 0 0 0];
 
 % Run Ode Solver
 
-[T,y] = ode45(@(t,Y) blebSolver(t,Y,R,params) , tspan ,...
+[T,y] = ode45(@(t,Y) blebSolver(t,Y,R,params, k5plus_fun) , tspan ,...
     init_cond);

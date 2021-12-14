@@ -1,4 +1,4 @@
-function  dY_dt = blebSolver(~,Y,R,params)
+function  dY_dt = blebSolver(t,Y,R,params,k5plusval)
 
 %BLEBSOLVER is a function that holds all the equations for the differential
 %equation and takes in the variables needed to solve the differential
@@ -11,7 +11,7 @@ k1plus = params(1);
 k2plus = params(2);
 k3plus = params(3);
 k4plus = params(4);
-k5plus = params(5);
+%k5plus = params(5);
 
 
 % Set K minus parameters
@@ -30,6 +30,8 @@ MCOR = Y(3);
 RASB = Y(4);
 MHCKA = Y(5);
 
+k5plus = k5plusval(t);      
+
 dGBG_dt = k1plus*R*(1-GBG)- k1minus*GBG;          %eq (G beta gamma)
 dGBPC_dt =  k2plus*GBG*(1-GBPC)-k2minus*GBPC;  %eq (GBPC)
 dMCOR_dt =  k3plus*GBPC*(1-MCOR)-k3minus*MCOR*MHCKA;  %eq (XMCOR)
@@ -37,13 +39,5 @@ dRASB_dt =  k4plus*GBG*(1-RASB)-k4minus*RASB;  %eq (RASB)
 dMHCKA_dt = k5plus*RASB*(1-MHCKA)-k5minus*MHCKA;  %eq (XMCHKA)
 
 dY_dt = [dGBG_dt; dGBPC_dt; dMCOR_dt; dRASB_dt; dMHCKA_dt];
-
-end
-
-function [value,isterminal,direction] = event(~,Y)
-
-value      = Y(1) - ; 
-isterminal = 1;   % HALT INTEGRATION WHEN I1a+I2 = 0.05
-direction  = 0;
 
 end

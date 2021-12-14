@@ -31,7 +31,7 @@ k5minus = 1/115;    % MHCKA
 % Calculate k5plus as a function of time
 
 k5plus = 1/11;   % MHCKA
-a = 0.5;
+a = .001;
 tSteadyState = 100;
 k5plus_fun = @(t) kfiveplus(t, k5plus, a, tSteadyState);
 
@@ -40,6 +40,8 @@ k5plus_fun = @(t) kfiveplus(t, k5plus, a, tSteadyState);
 GBG = (k1plus*R)/(k1plus*R+k1minus);   % Steady State eq (G beta gamma)
 GBPC =  (k2plus*GBG)/(k2plus*GBG+k2minus);  % Steady State eq (GBPC)
 RASB =  (k4plus*GBG)/(k4plus*GBG-k4minus);  % Steady State eq (RASB)
+MHCKASS = (k5plus*RASB)/(k5plus*RASB+k5minus);
+MCORSS = (k3plus*GBPC)/(k3plus*GBPC+k3minus*MHCKASS);
 
 
 % Put parameter values into vector
@@ -48,29 +50,39 @@ params = [k3plus, k3minus, k5minus];
 
 % Set time span
 
-tspan = [0 1200];
+tspan = [100 150];
 
 % Set initial conditions
 
-init_cond = [0.5 0.5];
+init_cond = [MHCKASS MCORSS];
 
 % Run Ode Solver
 
-[T,y] = ode45(@(t,Y) blebSolverSteadyStates(t,Y, k5plus_fun, params, GBG, GBPC, RASB) , tspan ,...
+[T,y] = ode45(@(t,Y) blebSolverSteadyStates(t,Y, k5plus_fun, params, GBPC, RASB) , tspan ,...
     init_cond);
 
-
 % Plot solutions
+
+y(end,:)
 
 figure(1)
 
 plot(T,y, 'linewidth', 2)
 
-title("Time Versus Concentrations", 'FontSize', 20)
+title("Time Versus Concentrations MCOR", 'FontSize', 20)
 xlabel("Time (Seconds)",'FontSize', 17)
 ylabel("Concentrations",'FontSize', 17)
 
 legend('MCOR', 'MHCKA','location','southeast')
+
+% figure(2)
+% 
+% plot(T,y(:,2), 'linewidth', 2)
+% 
+% title("Time Versus Concentrations MHCKA", 'FontSize', 20)
+% xlabel("Time (Seconds)",'FontSize', 17)
+% ylabel("Concentrations",'FontSize', 17)
+
 
 % Save Time Series Plot as JPG File in a Folder with the
 % Date
