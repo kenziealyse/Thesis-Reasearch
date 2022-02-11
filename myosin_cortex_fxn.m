@@ -35,9 +35,9 @@ end
 
 max_MhcA = max(max_MhcA_vec);
 
-figure
-
 if plotFrames == 1
+    
+    figure
 
 for i = 1:m-1
     subplot(3,5,i)

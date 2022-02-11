@@ -1,4 +1,4 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % File to Run Ode Solver for the Steady 
 % state ODE and save a times series plot as a figure
 %
@@ -12,7 +12,7 @@ clear all
 
 % Set 1 if want to save figure and set 0 if do not want to save figure
 
-savefigure = 0; 
+savefigure = 1; 
 
 % Set paramets values
 
@@ -50,7 +50,7 @@ params = [k3plus, k3minus, k5minus];
 
 % Set time span
 
-tspan = [100 150];
+tspan = [100 200];
 
 % Set initial conditions
 
@@ -68,8 +68,8 @@ y(end,:)
 figure(1)
 
 plot(T,y, 'linewidth', 2)
-
-title("Time Versus Concentrations MCOR", 'FontSize', 20)
+grid on
+title("Time Versus Concentrations MCOR and MHCKA", 'FontSize', 20)
 xlabel("Time (Seconds)",'FontSize', 17)
 ylabel("Concentrations",'FontSize', 17)
 

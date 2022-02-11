@@ -1,6 +1,6 @@
 function [solutions] = max_fxn(str1,str2, bleb_start, frames, plotn, bleb_frame1, bleb_frame2)
 
-t0 = bleb_start;
+t0 = bleb_start
 
 solutions = zeros(1,15);
 
@@ -42,26 +42,26 @@ for i = t0:frames
 
 end
 
-% temp1
-% temp2
-% temp3
-% 
-% max_MhcA_vec_A
-% 
-% max_MhcA_vec_B
-% 
-% max_MhcA_vec_C
+temp1
+temp2
+temp3
+
+max_MhcA_vec_A;
+
+max_MhcA_vec_B;
+
+max_MhcA_vec_C;
 
 % Find Average of 3 Values
     
-for i = 1:length(max_MhcA_vec_A)
+for i = t0:frames
     
-    solutions(i) = (max_MhcA_vec_A(i) + max_MhcA_vec_B(i) + ... 
+    solutions(i-t0+1) = (max_MhcA_vec_A(i) + max_MhcA_vec_B(i) + ... 
        max_MhcA_vec_C(i))./3;
     
 end
 
-% solutions
+solutions;
 
 
 
