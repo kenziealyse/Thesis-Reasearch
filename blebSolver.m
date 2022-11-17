@@ -4,7 +4,7 @@ function  dY_dt = blebSolver(t,Y,R,params,k5plusval)
 %equation and takes in the variables needed to solve the differential
 %equations
 
-
+%testing
 % Set k plus paramets
 
 k1plus = params(1);
