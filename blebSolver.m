@@ -3,7 +3,7 @@ function  dY_dt = blebSolver(~,Y,R,params)
 %BLEBSOLVER is a function that holds all the equations for the differential
 %equation and takes in the variables needed to solve the differential
 %equations
-
+%testing
 
 % Set k plus paramets
 k1plus = params(1);
