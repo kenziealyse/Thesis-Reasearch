@@ -1,15 +1,14 @@
 function [max_MhcA_vec, T] = myosin_cortex_fxn (frames, bleb_frame, bleb_MhcA_data, plotFrames)
+% function to plot (if plotn = 1) the myosin intensity data at the cortext from cell data 
+% over time and return vector with the data and time (T)
 
-
-frameRate = 2.14; %Time interval between frames
-
-
-bleb_MhcA = bleb_MhcA_data(:,bleb_frame:bleb_frame+frames); % To isolote bleb or boundary of interest
+%Time interval between frames
+frameRate = 2.14; 
+% To isolote bleb or boundary of interest
+bleb_MhcA = bleb_MhcA_data(:,bleb_frame:bleb_frame+frames); 
 
 % Remove nan cells from data
-
 first_nan_idx = find(isnan(bleb_MhcA(:,1)));
-
 if first_nan_idx >1 
      bleb_MhcA_gd = bleb_MhcA(1:first_nan_idx(1)-1,:);
 else
@@ -18,7 +17,6 @@ end
 
 
 % SCALE INTENSITY DATA
-
 [n,m] = size(bleb_MhcA_gd);
 bleb_MhcA = zeros(n,m);
 bleb_MhcA(:,1)= bleb_MhcA_gd(:,1);
@@ -32,13 +30,10 @@ end
 
 
 % PLOT SCALED INTENSITY DATA
-
 max_MhcA = max(max_MhcA_vec);
 
 if plotFrames == 1
-    
     figure
-
 for i = 1:m-1
     subplot(3,5,i)
     plot(bleb_MhcA(:,1),bleb_MhcA(:,i+1),'g-','LineWidth',3)
@@ -53,7 +48,6 @@ for i = 1:m-1
     legend('MhcA')
     hold off
 end
-
 end
 
 for i = 1:m-1

@@ -1,15 +1,13 @@
 function [solutions] = linearspline(t1, v1, t2)
-% Linear spline to interpolate the values. 
-% No extrapolation is allowed
-% Given data: (t1,v1), return data interpolated at t2
-% assume evenly spaced intervals in both t1 and t2.
+
+% Linear spline to interpolate the values. No extrapolation is allowed
+% Given data: (t1,v1), return data interpolated at t2 assume evenly   
+% spaced intervals in both t1 and t2.
 
 n1 = length(t1);
 n2 = length(t2);
 
 dt1 = t1(2)-t1(1);
-
-n = n2;
 
 count = 0;
 
@@ -41,7 +39,7 @@ for i=1:n
              break;
          end
    end
-   if tempVal < 0   %ask about this
+   if tempVal < 0 
            v(i) = 0;
    else
            v(i) = tempVal;
