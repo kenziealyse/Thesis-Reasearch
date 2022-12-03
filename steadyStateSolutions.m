@@ -15,10 +15,8 @@ SSsolns = zeros(length(R), length(init_cond));
 
 % Run Ode Solver in loop for various R0 values
 for i = 1:length(R)
-    
     [T,y] = ode45(@(t,Y) blebSolver(t,Y,R(i),params) , tspan ,...
-    init_cond);
-    
+    init_cond); 
     SSsolns(i, :) = y(end, :); 
 end
 

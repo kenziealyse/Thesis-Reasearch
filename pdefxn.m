@@ -38,5 +38,8 @@ init_solnmat = solution;
 GBG_soln(i) = solution(1);
 end
 
+% figure(3)
+% plot(GBG_soln)
+
 end
 

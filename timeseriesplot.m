@@ -3,12 +3,12 @@
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % CLEAR THE WORKSPACE
-
 close all
-clear all
+clear
 
-savefigure = 0; % Set 1 if want to save figure and set 0 if do not want to save figure
+savefigure = 1; % Set 1 if want to save figure and set 0 if do not want to save figure
 
 % Set paramets values
 [R, lengthScale, d, deltaT, final_time,...
@@ -18,7 +18,7 @@ savefigure = 0; % Set 1 if want to save figure and set 0 if do not want to save 
 
 % Put parameter values into vector
 params = [k1plus, k2plus, k3plus, k4plus, k5plus, ...
-    k1minus, k2minus, k3minus, k4minus, k5minus];
+    k1minus, k2minus, k3minus, k4minus, k5minus, k_0];
 
 % Set time span
 tspan = [0 200];
@@ -29,7 +29,6 @@ init_cond = [.5 .01 .01 .01 .01];
 % Run Ode Solver
 [T,y] = ode45(@(t,Y) blebSolver(t,Y,R,params) , tspan ,...
     init_cond);
-
 
 % Plot solutions
 figure(1)
@@ -48,7 +47,7 @@ set(0,'defaultaxesfontsize',16);
 ylim([0 1])
 xlabel("\bf Time (Seconds)")
 ylabel("\bf Concentration")
-legend('GBG', 'GBPC', 'MCOR', 'RasB', 'MHCKA','location','southeast')
+legend('GBG', 'GBPC', 'MCOR', 'RasB', 'MHCKA','location','best')
 
 set(gcf, 'Units', 'Inches');
 pos = get(gcf, 'Position');
@@ -58,14 +57,8 @@ figure_name = ['/SSSolnsPlot', '.pdf'];
 dirPath = strcat('/','figures', figure_name); % Directory Path
 saveas(gcf,[pwd dirPath]); % Save Figure in Folder
 
-% Save Time Series Plot as JPG File in a Folder with the
-% Date
-
-for i = 1:5
-   
+for i = 1:5 
     SSsolns(i, 1) = y(end,i); 
-
-
 end
 
 VarNames = {'GBG Steady State', 'GBPC Steady State', 'MCOR Steady State',...

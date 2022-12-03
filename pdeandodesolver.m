@@ -35,7 +35,7 @@ RasBprime = Y(:,3);
 MHCKAprime = Y(:,4);
 
 % Calculate the percent change of myosin
-percentChange = 100*((max(MCORprime) - MCORprime(1))/MCORprime(1));
+percentChange = 100*((max(MCORprime) - MCORprime(1))/MCORprime(1))
 
 % Save the figures
 myosin_fig = figure(2);

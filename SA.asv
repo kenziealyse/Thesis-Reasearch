@@ -13,8 +13,7 @@ clear
 clc
 
 % Which value do you want to randomize? (alpha or beta)
-str = 'alpha';
-num_of_rand_sample = 10000;
+str = 'beta';
 
 if strcmp(str,'beta')
 var1_values = [7, 8, 9, 10];
@@ -44,14 +43,13 @@ figureName = ['k2plus', 'k3plus', 'k4plus', 'k5plus', 'k2minus', ...
     k_0] = setParameters();
 
 randomized_params = [beta, alpha];
-randomized_params2 = [k1minus, k1plus];
 
 % Set paramets values
 init_var_testing = randomized_params(random_index);
 lower_bound = init_var_testing - .2*init_var_testing;
 upper_bound = init_var_testing + .2*init_var_testing;
-var_values = lower_bound:.00001:upper_bound;  % alpha
-var_rand_sample = randsample(var_values, num_of_rand_sample);
+var_values = lower_bound:.001:upper_bound;  % alpha
+var_rand_sample = randsample(var_values, 10);
 
 % Set time span
 tspan = 0:deltaT:final_time;
@@ -73,7 +71,7 @@ initial_percent = 100*((max(MCORprime) - MCORprime(1))/MCORprime(1));
 percentChange = zeros(length(var_rand_sample),1);
 
 for jj = 1:length(var_rand_sample)
-    params(var1) = var_rand_sample(jj)*randomized_params2(random_index);           
+    params(var1) = var_rand_sample(jj)*k1minus;           
     Y = blebSolverforPDE(R, params, final_time, d, lengthScale, deltaT, ...
     tspan, k_0);
     GBPCprime = Y(:,1);
@@ -84,22 +82,21 @@ for jj = 1:length(var_rand_sample)
     percentChange(jj) = initial_percent - 100*((max(MCORprime) - MCORprime(1))/MCORprime(1));
 end
 
-
-myxlim = [floor(min(percentChange)), ceil(max(percentChange))];
-edges = floor(min(percentChange)):1:ceil(max(percentChange));
+temp = max(floor(min(percentChange)), ceil(max(percentChange)))
+myxlim = [-temp, temp];
+edges = floor(min(percentChange)):2:ceil(max(percentChange));
 
 figure(i)
 histogram(percentChange, edges);
 xlabel('\bf Percent Change','FontSize',17);
 ylabel('\bf Frequency','FontSize',17);
 xlim(myxlim)
-xticks(floor(min(percentChange)):2:ceil(max(percentChange)));
 
 set(gcf, 'Units', 'Inches');
 pos = get(gcf, 'Position');
 set(gcf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Inches', 'PaperSize', [pos(3), pos(4)]);
 
-figure_name = ['/SA', figureName(index), '_' str, '_randomized', 'histo.pdf'];
+figure_name = ['/SA', figureName(index), 'histo.pdf'];
 dirPath = strcat('/','figures', figure_name); % Directory Path
 saveas(gcf,[pwd dirPath]); % Save Figure in Folder
 end
