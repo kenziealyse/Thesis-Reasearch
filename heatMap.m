@@ -13,8 +13,8 @@ clear
 clc
 
 % Set alpha and beta values for for loop
-alpha_values = 15:.5:35;    %alpha
-sigma_values = 4.5:.01:6.5;    %sigma
+alpha_values = 5:.5:60;    %alpha
+sigma_values = .5:.01:7;    %sigma
 
 
 % Preallocate space
@@ -64,15 +64,15 @@ xlabel('\bf \alpha Value','FontSize',17);
 ylabel('\bf \sigma Value','FontSize',17);
 colorbar;
 set(gca,'YDir','normal');  % Flip the y-axis to make it standardly oriented
-% 
-% hold on
-% rectangle('Position', [15, 4.5, 20, 2], 'EdgeColor','r', 'LineWidth', 1.5)
-% 
+hold on
+plot(30,5.5,'.', 'Color', 'r', 'MarkerSize', 20)
+
+rectangle('Position', [15, 4.5, 20, 2], 'EdgeColor','r', 'LineWidth', 1.5) 
 
 set(gcf, 'Units', 'Inches');
 pos = get(gcf, 'Position');
 set(gcf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Inches', 'PaperSize', [pos(3), pos(4)]);
 
-figure_name = ['/parameter','heatmap_box_values.pdf'];   
+figure_name = ['/parameter','heatmap_with_box_and_point.pdf'];   
 dirPath = strcat('/','figures', figure_name); % Directory Path
 saveas(gcf,[pwd dirPath]); % Save Figure in Folder

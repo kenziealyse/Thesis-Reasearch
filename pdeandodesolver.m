@@ -39,30 +39,30 @@ percentChange = 100*((max(MCORprime) - MCORprime(1))/MCORprime(1))
 
 % Save the figures
 myosin_fig = figure(2);
-plot(tspan, MCORprime, 'LineWidth', 2, 'Color', 'm')
+plot(tspan, MCORprime, 'LineWidth', 2, 'Color', 'm', 'LineStyle',':')
 xlabel('\bf Time (Seconds)', 'Fontsize', 17)
 ylabel('\bf Concentration', 'Fontsize', 17)
 set(myosin_fig, 'Units', 'Inches');
 pos = get(myosin_fig, 'Position');
 set(myosin_fig, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Inches', 'PaperSize', [pos(3), pos(4)]);
-figure_name = ['/MyosinTimeSeriesPlot', '.pdf'];   
+figure_name = ['/MyosinTimeSeriesPlot_redpoint', '.pdf'];   
 dirPath = strcat('/','figures', figure_name); % Directory Path
-% saveas(gcf,[pwd dirPath]); % Save Figure in Folder
+saveas(gcf,[pwd dirPath]); % Save Figure in Folder
 
 all_fig = figure(1);
-plot(tspan, GBPCprime, 'LineWidth', 2, 'Color', 'b')
+plot(tspan, GBPCprime, 'LineWidth', 2.5, 'Color', 'b', 'LineStyle','-.')
 hold on
-plot(tspan, MCORprime, 'LineWidth', 2, 'Color', 'm')
-plot(tspan, RasBprime, 'LineWidth', 2, 'Color', 'g')
-plot(tspan, MHCKAprime, 'LineWidth', 2, 'Color', 'k')
+plot(tspan, MCORprime, 'LineWidth', 2, 'Color', 'm', 'LineStyle',':')
+plot(tspan, RasBprime, 'LineWidth', 1.5, 'Color', 'g', 'LineStyle','-')
+plot(tspan, MHCKAprime, 'LineWidth', 1, 'Color', 'k', 'LineStyle','--')
 legend('GBPC','Myosin', 'RasB', 'MHCKA', 'Location', 'Best', 'FontSize', 17)
 ylabel('\bf Concentration', 'FontSize', 17)
 xlabel('\bf Time (Seconds)', 'FontSize', 17)
 set(all_fig, 'Units', 'Inches');
 pos = get(all_fig, 'Position');
 set(all_fig, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Inches', 'PaperSize', [pos(3), pos(4)]);
-figure_name = ['/ALLTimeSeriesPlot', '.pdf'];   
+figure_name = ['/ALLTimeSeriesPlot_redpoint', '.pdf'];   
 dirPath = strcat('/','figures', figure_name); % Directory Path
-% saveas(gcf,[pwd dirPath]); % Save Figure in Folder
+saveas(gcf,[pwd dirPath]); % Save Figure in Folder
 
 
