@@ -14,7 +14,7 @@ clc
 
 % Which value do you want to randomize? (alpha or beta)
 str = 'alpha';
-num_of_rand_sample = 10000;
+num_of_rand_sample = 5001;
 
 if strcmp(str,'beta')
 var1_values = [7, 8, 9, 10];
@@ -41,7 +41,7 @@ figureName = ["k2plus", "k3plus", "k4plus", "k5plus", "k2minus", ...
 [R, lengthScale, d, deltaT, final_time,...
     k1plus, alpha, k2plus, k3plus, k4plus, k5plus, k3minus,...
     k1minus, beta, k2minus, k4minus, k5minus, k6minus,...
-    k_0, ~] = setParameters();
+    k_0, myxlim] = setParameters();
 
 randomized_params = [beta, alpha];
 randomized_params2 = [k1minus, k1plus];
@@ -71,6 +71,7 @@ initial_percent = 100*((max(MCORprime) - MCORprime(1))/MCORprime(1));
 
 % Pre Allocate Space 
 percentChange = zeros(length(var_rand_sample),1);
+MCORprime2 = zeros(length(tspan),length(var_rand_sample));
 
 for jj = 1:length(var_rand_sample)
     params(var1) = var_rand_sample(jj)*randomized_params2(random_index);           
@@ -82,28 +83,24 @@ for jj = 1:length(var_rand_sample)
     MHCKAprime = Y(:,4);
     % Calculate the percent change of myosin
     percentChange(jj) = initial_percent - 100*((max(MCORprime) - MCORprime(1))/MCORprime(1));
+    MCORprime2(:,jj) = MCORprime;
 end
 
-
-% myxlim = [floor(min(percentChange)), ceil(max(percentChange))];
-% edges = floor(min(percentChange)):1:ceil(max(percentChange));
-
-edges = -30:1:30;
-myxlim = [-30, 30];
-
 figure(i)
-histogram(percentChange, edges);
-xlabel('\bf Percent Change','FontSize',17);
-ylabel('\bf Frequency','FontSize',17);
+[lineh, bandsh] = fanChart(tspan, MCORprime2, 'median');
+txt = strcat({'Pct'}, cellstr(int2str((10:10:90)')));
+legend([lineh;bandsh], [{'Median'};txt], 'location', 'best')
+ylabel('\bf Concentraion','FontSize',17)
+xlabel('\bf Time (seconds)','FontSize',17)
 xlim(myxlim)
-% xticks(floor(min(percentChange)):2:ceil(max(percentChange)));
-xticks(-30:5:30)
+ylim([.5 1])
+yticks(.5:.1:1)
 
 set(gcf, 'Units', 'Inches');
 pos = get(gcf, 'Position');
 set(gcf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Inches', 'PaperSize', [pos(3), pos(4)]);
 
-figure_name = ['/SA', figureName{index}, '_' str, '_randomized', 'histo.pdf'];
+figure_name = ['/PrctilePlot', figureName{index}, '_' str, '.pdf'];
 dirPath = strcat('/','figures', figure_name); % Directory Path
 saveas(gcf,[pwd dirPath]); % Save Figure in Folder
 end

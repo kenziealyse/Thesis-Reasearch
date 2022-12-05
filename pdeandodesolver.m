@@ -15,7 +15,7 @@ clc
 [R, lengthScale, d, deltaT, final_time,...
     k1plus, alpha, k2plus, k3plus, k4plus, k5plus, k3minus,...
     k1minus, beta, k2minus, k4minus, k5minus, k6minus,...
-    k_0] = setParameters();
+    k_0, myxlim] = setParameters();
 
 % Set time span
 tspan = 0:deltaT:final_time;
@@ -40,6 +40,7 @@ percentChange = 100*((max(MCORprime) - MCORprime(1))/MCORprime(1))
 % Save the figures
 myosin_fig = figure(2);
 plot(tspan, MCORprime, 'LineWidth', 2, 'Color', 'm', 'LineStyle',':')
+xlim(myxlim)
 xlabel('\bf Time (Seconds)', 'Fontsize', 17)
 ylabel('\bf Concentration', 'Fontsize', 17)
 set(myosin_fig, 'Units', 'Inches');
@@ -58,6 +59,7 @@ plot(tspan, MHCKAprime, 'LineWidth', 1, 'Color', 'k', 'LineStyle','--')
 legend('GBPC','Myosin', 'RasB', 'MHCKA', 'Location', 'Best', 'FontSize', 17)
 ylabel('\bf Concentration', 'FontSize', 17)
 xlabel('\bf Time (Seconds)', 'FontSize', 17)
+xlim(myxlim)
 set(all_fig, 'Units', 'Inches');
 pos = get(all_fig, 'Position');
 set(all_fig, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Inches', 'PaperSize', [pos(3), pos(4)]);

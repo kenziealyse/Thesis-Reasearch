@@ -14,7 +14,7 @@ savefigure = 1; % Set 1 if want to save figure and set 0 if do not want to save 
 [R, lengthScale, d, deltaT, final_time,...
     k1plus, alpha, k2plus, k3plus, k4plus, k5plus, k3minus,...
     k1minus, beta, k2minus, k4minus, k5minus, k6minus,...
-    k_0] = setParameters();
+    k_0, ~] = setParameters();
 
 % Put parameter values into vector
 params = [k1plus, k2plus, k3plus, k4plus, k5plus, ...
@@ -45,6 +45,7 @@ plot(T, RASB, 'LineWidth', 1.5, 'Color', 'g', 'LineStyle','-')
 plot(T, MHCKA, 'LineWidth', 1, 'Color', 'k', 'LineStyle','--')
 set(0,'defaultaxesfontsize',16);
 ylim([0 1])
+xlim([0 200])
 xlabel("\bf Time (Seconds)")
 ylabel("\bf Concentration")
 legend('GBG', 'GBPC', 'MCOR', 'RasB', 'MHCKA','location','best')

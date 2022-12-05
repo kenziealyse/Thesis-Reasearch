@@ -23,7 +23,7 @@ percentChange = zeros(length(sigma_values), length(alpha_values));
 % Set paramets values
 [R, lengthScale, d, deltaT, final_time,...
     k1plus, alpha, ~, ~, ~, ~, ~,...
-    k1minus, beta, ~, ~, ~, ~, k_0] = setParameters();
+    k1minus, beta, ~, ~, ~, ~, k_0, ~]= setParameters();
 
 for i = 1:length(alpha_values)
     alpha = alpha_values(i);         % alpha
