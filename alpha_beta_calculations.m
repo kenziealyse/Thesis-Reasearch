@@ -12,7 +12,7 @@ close all
 gamma = (k1minus/k1plus)*(1 + (k1minus/k1plus)*(1/R));
 sigma = k1plus/k1minus;
 
-max_beta = ((-1 + sqrt(1 + 4*gamma*sigma)))/(2*gamma);
+max_beta = ((-1 + sqrt(1 + 4*gamma*sigma)))/(2*gamma)
 
 x = -20:.001:10;
 x_vals = 0:.001:max_beta;

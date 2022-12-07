@@ -13,8 +13,8 @@ clear
 clc
 
 % Which value do you want to randomize? (alpha or beta)
-str = 'alpha';
-num_of_rand_sample = 5001;
+str = 'beta';
+num_of_rand_sample = 1301;
 
 if strcmp(str,'beta')
 var1_values = [7, 8, 9, 10];
@@ -26,7 +26,7 @@ index_values = [1, 2, 3, 4];
 random_index = 2;
 end
 
-for i = 1:length(var1_values)
+for i = 2:2%1:length(var1_values)
 % SET THESE
 
 index = index_values(i); % which string do you want?
@@ -64,10 +64,10 @@ params = [k1plus, k2plus, k3plus, k4plus, k5plus, ...
 Y = blebSolverforPDE(R,params, final_time, d, lengthScale, deltaT, ...
     tspan, k_0);
 GBPCprime = Y(:,1);
-MCORprime = Y(:,2);
+MCORprime_orig = Y(:,2);
 RasBprime = Y(:,3);
 MHCKAprime = Y(:,4);
-initial_percent = 100*((max(MCORprime) - MCORprime(1))/MCORprime(1));
+initial_percent = 100*((max(MCORprime_orig) - MCORprime_orig(1))/MCORprime_orig(1));
 
 % Pre Allocate Space 
 percentChange = zeros(length(var_rand_sample),1);
@@ -88,8 +88,13 @@ end
 
 figure(i)
 [lineh, bandsh] = fanChart(tspan, MCORprime2, 'median');
-txt = strcat({'Pct'}, cellstr(int2str((10:10:90)')));
-legend([lineh;bandsh], [{'Median'};txt], 'location', 'best')
+hold on
+plot(tspan, MCORprime_orig, 'LineWidth', 1.5, 'Color', 'b')
+% txt = strcat({'Pct'}, cellstr(int2str(([95 90 50])')));
+legend('Pct90','Pct80', 'Pct70', 'Pct60', ...
+    'Pct50', 'Pct40', 'Pct30', 'Pct20', 'Pct10','Median',...
+    'Orginal', 'location', 'best')
+% legend([lineh;bandsh], [{'Median'};txt], 'location', 'best')
 ylabel('\bf Concentraion','FontSize',17)
 xlabel('\bf Time (seconds)','FontSize',17)
 xlim(myxlim)

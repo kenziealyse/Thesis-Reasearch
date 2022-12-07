@@ -7,7 +7,7 @@ function [R, lengthScale, d, deltaT, final_time,...
 % Set paramets values
 R = 0.8;                         % Initial active receptors 
 lengthScale = 2.725;             % Diffusion length scale
-sigma = 5.5;
+sigma = 10;
 d = .011;                        % Diffusion Rate
 deltaT = 0.0026;%.01;                    % Time Step
 final_time = 13;                 % Final Time

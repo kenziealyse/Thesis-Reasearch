@@ -24,7 +24,7 @@ params = [k1plus, k2plus, k3plus, k4plus, k5plus, ...
 tspan = [0 200];
 
 % Set initial conditions
-init_cond = [.5 .01 .01 .01 .01];
+init_cond = [.5 .01 .01 .01 0.1];
 
 % Run Ode Solver
 [T,y] = ode45(@(t,Y) blebSolver(t,Y,R,params) , tspan ,...
@@ -54,7 +54,7 @@ set(gcf, 'Units', 'Inches');
 pos = get(gcf, 'Position');
 set(gcf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Inches', 'PaperSize', [pos(3), pos(4)]);
 
-figure_name = ['/SSSolnsPlot', '.pdf'];   
+figure_name = ['/SSSolnsPlot_0SS', '.pdf'];   
 dirPath = strcat('/','figures', figure_name); % Directory Path
 saveas(gcf,[pwd dirPath]); % Save Figure in Folder
 
