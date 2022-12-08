@@ -18,7 +18,7 @@ k2minus = params(7);
 k3minus = params(8);
 k4minus = params(9);
 k5minus = params(10);
-k_0 = params(11)
+k_0 = params(11);
 
 % Relabel to easily keep track of compartments
 GBG = Y(1);

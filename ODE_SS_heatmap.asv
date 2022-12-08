@@ -14,8 +14,7 @@ clc
 
 % Set alpha and beta values for for loop
 alpha_values = 5:1:15;    %alpha
-sigma_values = .5:.0001:20;    %sigma
-m = 2;
+sigma_values = .5:.1:20;    %sigma
 % Set initial conditions
 init_cond = [.5 .01 .01 .01 0.1];
 % Set time span
@@ -58,26 +57,20 @@ for i = 1:length(alpha_values)
         MHCKA_numerical_0 = y(end,5);
         MHCKA_calculated_0 = SSsolns(5);
 
-       if MHCKA_calculated_0 > 10^(-m) && MHCKA_calculated_0 < 0.1
-                MHCKA_calculated_0 = 0.1;
-       end
-       if MHCKA_calculated_0 < -10^(-m) && MHCKA_calculated_0 > -0.1
-                MHCKA_calculated_0 = -0.1;
-       end
-
-       if MHCKA_numerical_0 > 10^(-m) && MHCKA_numerical_0 < 0.1
-                MHCKA_numerical_0 = 0.1;
-       end
-       if MHCKA_numerical_0 < -10^(-m) && MHCKA_numerical_0 > -0.1
-                MHCKA_numerical_0 = -0.1;
-       end
-
-
         MHCKA_values_numerical(p,i) = MHCKA_numerical_0;
         MHCKA_values_calculated(p,i) = MHCKA_calculated_0;
     end 
 end
 
+n = 9;
+% %get the values in the Excel using xlsread.
+% T = readtable('ColorBrewer_all_schemes_RGBonly3.xls');
+% %combine data as you want:
+% AllData={T.R;T.G;T.B};%as you want
+% %save in mat file
+% save('colorbrewer.mat','AllData');%In your matfile name
+% cbrewer2_plot_samples()
+% n = 11; % should be odd 
 cmap = [247 239 210
 247 239 210
 247 239 210
@@ -127,7 +120,7 @@ colorbar
 set(gca, 'CLim', [-.4, .4]);
 colorbar('XTickLabel',{'-0.4','-0.3','-0.2','-0.1',...
                '0','0.1','0.2','0.3','0.4'}, ...
-               'XTick', -.4:.1:.4)
+               'XTick', [-.4 -.3 -.2 -.1 ]-.4:.1:.4)
 set(gca,'YDir','normal');  % Flip the y-axis to make it standardly oriented
 set(gcf, 'Units', 'Inches');
 pos = get(gcf, 'Position');

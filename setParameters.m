@@ -7,12 +7,12 @@ function [R, lengthScale, d, deltaT, final_time,...
 % Set paramets values
 R = 0.8;                         % Initial active receptors 
 lengthScale = 2.725;             % Diffusion length scale
-sigma = 10;
+sigma = 7.4;
 d = .011;                        % Diffusion Rate
 deltaT = 0.0026;%.01;                    % Time Step
 final_time = 13;                 % Final Time
 k1plus = 1/10;                   % GBgamma
-alpha = 30;                      % alpha
+alpha = 15;                      % alpha
 k2plus = alpha*k1plus;           % GBPC
 k3plus = alpha*k1plus;           % MCOR
 k4plus = alpha*k1plus;           % RasB
