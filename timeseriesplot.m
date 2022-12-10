@@ -9,7 +9,8 @@ close all
 clear
 clc
 
-savefigure = 1; % Set 1 if want to save figure and set 0 if do not want to save figure
+savefigure = 1; % Set 1 if want to save figure and set 0 if do not want to
+% save figure
 
 % Set paramets values
 [R, lengthScale, d, deltaT, final_time,...
