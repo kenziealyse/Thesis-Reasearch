@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Author: Mackenzie Dalton
-%
-%
+% This file plots the percentiles when
+% varying the receptor occupancy within
+% the specified range.
 %
 %
 %
@@ -12,6 +12,7 @@ close all
 clear
 clc
 
+% How many random samples do you want?
 num_of_rand_sample = 10000;
 
 % Set paramets values
@@ -56,11 +57,13 @@ for jj = 1:length(R_rand_sample)
     RasBprime = Y(:,3);
     MHCKAprime = Y(:,4);
     % Calculate the percent change of myosin
-    percentChange(jj) = initial_percent - 100*((max(MCORprime) - MCORprime(1))/MCORprime(1));
+    percentChange(jj) = initial_percent - ...
+        100*((max(MCORprime) - MCORprime(1))/MCORprime(1));
+     % Save the solution vector for myosin
     MCORprime2(:,jj) = MCORprime;
 end
 
-
+% Plot the percentiles and baseline values of myosin
 figure(1)
 [lineh, bandsh] = fanChart(tspan, MCORprime2, 'median');
 txt = strcat({'Pct'}, cellstr(int2str((10:10:90)')));
@@ -71,10 +74,10 @@ xlim(myxlim)
 ylim([.5 1])
 yticks(.5:.1:1)
 
+% Save the figure
 set(gcf, 'Units', 'Inches');
 pos = get(gcf, 'Position');
 set(gcf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Inches', 'PaperSize', [pos(3), pos(4)]);
-
 figure_name = '/PercentilePlot_R.pdf';
 dirPath = strcat('/','figures', figure_name); % Directory Path
 saveas(gcf,[pwd dirPath]); % Save Figure in Folder

@@ -2,8 +2,7 @@ function  dY_dt = blebSolver(~,Y,R,params)
 
 %BLEBSOLVER is a function that holds all the equations for the differential
 %equation and takes in the variables needed to solve the differential
-%equations
-%testing
+%equations. It returns the solved ODE system in vector form.
 
 % Set k plus paramets
 k1plus = params(1);
@@ -28,10 +27,10 @@ RASB = Y(4);
 MHCKA = Y(5); 
 
 % System of equations
-dGBG_dt =   k1plus*R*(1-GBG) - k1minus*GBG;                            %eq (G beta gamma)
-dGBPC_dt =  k2plus*GBG*(1-GBPC)- k2minus*GBPC;  %eq (GBPC)
-dMCOR_dt =  k3plus*GBPC*(1-MCOR)- k3minus*MCOR*MHCKA;  %eq (XMCOR)
-dRASB_dt =  k4plus*GBG*(1-RASB) - k4minus*RASB;  %eq (RASB)
+dGBG_dt =   k1plus*R*(1-GBG) - k1minus*GBG;                     %eq (G beta gamma)
+dGBPC_dt =  k2plus*GBG*(1-GBPC)- k2minus*GBPC;                  %eq (GBPC)
+dMCOR_dt =  k3plus*GBPC*(1-MCOR)- k3minus*MCOR*MHCKA;           %eq (XMCOR)
+dRASB_dt =  k4plus*GBG*(1-RASB) - k4minus*RASB;                 %eq (RASB)
 dMHCKA_dt = k5plus*(RASB+k_0)*MHCKA*(1-MHCKA) - k5minus*MHCKA;  %eq (XMCHKA)
 
 % Solutions vector to return

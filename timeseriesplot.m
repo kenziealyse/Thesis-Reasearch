@@ -1,12 +1,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% File to Run Ode Solver and save a times series plot as a figure
-%
+% File to Run Ode Solver and save a times series 
+% plot as a figure
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % CLEAR THE WORKSPACE
 close all
 clear
+clc
 
 savefigure = 1; % Set 1 if want to save figure and set 0 if do not want to save figure
 
@@ -50,21 +51,24 @@ xlabel("\bf Time (Seconds)")
 ylabel("\bf Concentration")
 legend('GBG', 'GBPC', 'MCOR', 'RasB', 'MHCKA','location','best')
 
+% Save the figure
 set(gcf, 'Units', 'Inches');
 pos = get(gcf, 'Position');
 set(gcf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Inches', 'PaperSize', [pos(3), pos(4)]);
-
 figure_name = ['/SSSolnsPlot_0SS', '.pdf'];   
 dirPath = strcat('/','figures', figure_name); % Directory Path
 saveas(gcf,[pwd dirPath]); % Save Figure in Folder
+
+% Preallocate space
+SSsolns = zeros(5,1);
 
 for i = 1:5 
     SSsolns(i, 1) = y(end,i); 
 end
 
+% Print steady state values in table
 VarNames = {'GBG Steady State', 'GBPC Steady State', 'MCOR Steady State',...
         'RASB Steady State', 'MHCKA Steady State'};
-
 steady_state_table = table(SSsolns(1,1),SSsolns(2,1),SSsolns(3,1)...
     ,SSsolns(4,1),SSsolns(5,1), 'VariableNames',VarNames)
 

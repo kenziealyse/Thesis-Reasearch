@@ -1,9 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Author: Mackenzie Dalton
-%
-%
-%
-%
+% This file plots a heat map of the 
+% numerical and calculated values of
+% the steady state solution for MHCKA.
+% The heat map is broken up into 
+% positive, 0, and negative.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -13,14 +13,13 @@ clear
 clc
 
 % Set alpha and beta values for for loop
-alpha_values = 5:1:15;    %alpha
-sigma_values = .5:.0001:20;    %sigma
-m = 2;
+alpha_values = 5:1:15;         % alpha
+sigma_values = .5:.0001:20;    % sigma
+m = 2;                         % 10^(m) tolerance
 % Set initial conditions
 init_cond = [.5 .01 .01 .01 0.1];
 % Set time span
 tspan = [0 200];
-
 
 % Preallocate space
 MHCKA_values_numerical = zeros(length(sigma_values), length(alpha_values));
@@ -57,7 +56,8 @@ for i = 1:length(alpha_values)
 
         MHCKA_numerical_0 = y(end,5);
         MHCKA_calculated_0 = SSsolns(5);
-
+        
+       % Check how close steady state is to 0 
        if MHCKA_calculated_0 > 10^(-m) && MHCKA_calculated_0 < 0.1
                 MHCKA_calculated_0 = 0.1;
        end
@@ -72,27 +72,27 @@ for i = 1:length(alpha_values)
                 MHCKA_numerical_0 = -0.1;
        end
 
-
-        MHCKA_values_numerical(p,i) = MHCKA_numerical_0;
-        MHCKA_values_calculated(p,i) = MHCKA_calculated_0;
+       % Save steady state values
+       MHCKA_values_numerical(p,i) = MHCKA_numerical_0;
+       MHCKA_values_calculated(p,i) = MHCKA_calculated_0;
     end 
 end
 
+% Set color map, split colors by negative, 0 and positive
 cmap = [247 239 210
-247 239 210
-247 239 210
-247 239 210
-71 92 108
-205 139 98
-205 139 98
-205 139 98
-205 139 98]; % blues at bottom 
+        247 239 210
+        247 239 210
+        247 239 210
+        71 92 108
+        205 139 98
+        205 139 98
+        205 139 98
+        205 139 98];
 
+% switch colors to RGB numbers
 cmap = cmap./255;
 
-
-
-
+% Plot the heat map for numerical values
 figure(1)
 imagesc(alpha_values, sigma_values, MHCKA_values_numerical);
 hold on
@@ -104,17 +104,18 @@ colormap(cmap);
 colorbar('XTickLabel',{'-0.4','-0.3','-0.2','-0.1',...
                '0','0.1','0.2','0.3','0.4'}, ...
                'XTick', -.4:.1:.4)
-colorbar
 set(gca,'YDir','normal');  % Flip the y-axis to make it standardly oriented
 set(gcf, 'Units', 'Inches');
 set(gca, 'CLim', [-.4, .4]);
+
+% Save the figure
 pos = get(gcf, 'Position');
 set(gcf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Inches', 'PaperSize', [pos(3), pos(4)]);
-
 figure_name = ['/ODE_SS_numerical','heatmap.pdf'];   
 dirPath = strcat('/','figures', figure_name); % Directory Path
 saveas(gcf,[pwd dirPath]); % Save Figure in Folder
 
+% Plot the heat map for calculated values values
 figure(2)
 imagesc(alpha_values, sigma_values, MHCKA_values_calculated);
 colormap(parula(5))
@@ -123,16 +124,16 @@ yline(7.2129, 'linewidth', 2.5, 'Color', 'm')
 xlabel('\bf \alpha Value','FontSize',17);
 ylabel('\bf \sigma Value','FontSize',17);
 colormap(cmap);
-colorbar
 set(gca, 'CLim', [-.4, .4]);
 colorbar('XTickLabel',{'-0.4','-0.3','-0.2','-0.1',...
                '0','0.1','0.2','0.3','0.4'}, ...
                'XTick', -.4:.1:.4)
 set(gca,'YDir','normal');  % Flip the y-axis to make it standardly oriented
+
+% Save the figure
 set(gcf, 'Units', 'Inches');
 pos = get(gcf, 'Position');
 set(gcf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Inches', 'PaperSize', [pos(3), pos(4)]);
-
 figure_name = ['/ODE_SS_calculated','heatmap.pdf'];   
 dirPath = strcat('/','figures', figure_name); % Directory Path
 saveas(gcf,[pwd dirPath]); % Save Figure in Folder

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Author: Mackenzie Dalton
-%
-%
+% This file plots a heat map when
+% varying both sigma and alpha within
+% the specified range.
 %
 %
 %
@@ -14,8 +14,7 @@ clc
 
 % Set alpha and beta values for for loop
 alpha_values = 5:.5:60;    %alpha
-sigma_values = .5:.01:7;    %sigma
-
+sigma_values = .5:.01:sigma(plotn);    %sigma
 
 % Preallocate space
 percentChange = zeros(length(sigma_values), length(alpha_values));
@@ -58,6 +57,7 @@ for i = 1:length(alpha_values)
     end 
 end
 
+% Plot the heat map, red point, and rectangle
 figure(1)
 imagesc(alpha_values, sigma_values, percentChange);
 xlabel('\bf \alpha Value','FontSize',17);
@@ -66,13 +66,12 @@ colorbar;
 set(gca,'YDir','normal');  % Flip the y-axis to make it standardly oriented
 hold on
 plot(30,5.5,'.', 'Color', 'r', 'MarkerSize', 20)
-
 rectangle('Position', [15, 4.5, 20, 2], 'EdgeColor','r', 'LineWidth', 1.5) 
 
+% Save the figure
 set(gcf, 'Units', 'Inches');
 pos = get(gcf, 'Position');
 set(gcf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Inches', 'PaperSize', [pos(3), pos(4)]);
-
 figure_name = ['/parameter','heatmap_with_box_and_point.pdf'];   
 dirPath = strcat('/','figures', figure_name); % Directory Path
 saveas(gcf,[pwd dirPath]); % Save Figure in Folder

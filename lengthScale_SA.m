@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Author: Mackenzie Dalton
-%
-%
+% This file plots a histogram when
+% varying the length scale within
+% the specified range.
 %
 %
 %
@@ -12,6 +12,7 @@ close all
 clear
 clc
 
+% How many random samples do you want?
 num_of_rand_sample = 10000;
 
 % Set paramets values
@@ -58,10 +59,11 @@ for jj = 1:length(L_rand_sample)
     percentChange(jj) = initial_percent - 100*((max(MCORprime) - MCORprime(1))/MCORprime(1));
 end
 
-
+% Specifiy histogram limits and edges
 myxlim = [-30,30];
 edges = -30:1:30;
 
+% Plot the histogram
 figure(1)
 histogram(percentChange, edges);
 xlabel('\bf Percent Change','FontSize',17);
@@ -69,10 +71,10 @@ ylabel('\bf Frequency','FontSize',17);
 xlim(myxlim)
 xticks(-30:5:30);
 
+% Save the figure
 set(gcf, 'Units', 'Inches');
 pos = get(gcf, 'Position');
 set(gcf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Inches', 'PaperSize', [pos(3), pos(4)]);
-
 figure_name = '/SA_lengthScale_randomized_histo.pdf';
 dirPath = strcat('/','figures', figure_name); % Directory Path
 saveas(gcf,[pwd dirPath]); % Save Figure in Folder

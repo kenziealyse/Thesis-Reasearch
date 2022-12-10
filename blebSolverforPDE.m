@@ -2,7 +2,11 @@ function  Y = blebSolverforPDE(R,params, final_time, d, lengthScale, deltaT, ...
     tspan, k_0)
 
 %BLEBSOLVERforPDE is a function that solves the differential equations with
-%the pde solution
+%the pde solution. It first finds the steadt state soltion of each species,
+%then it solves the pde, and lastly it uses the output of the pde to solve
+%the ODE system. To solve the ODE system, a forward difference scheme is 
+%used. It returns the solutions to the ODE system in vector
+%form.
 
     % Preallocate Space
     RasBprime = zeros(length(tspan), 1);
@@ -36,23 +40,23 @@ function  Y = blebSolverforPDE(R,params, final_time, d, lengthScale, deltaT, ...
     RasBprime(1) = init_cond(3);
     MHCKAprime(1) = init_cond(4);
 
-for jj = 1:length(tspan) - 1   
-     %eq (GBPC)
-     GBPCprime(jj+1) =  GBPCprime(jj) + (k2plus*GBGSS*(1 - GBPCprime(jj)) ...
-         - k2minus*GBPCprime(jj))*deltaT;
-     %eq (XMCOR)
-     MCORprime(jj+1) =  MCORprime(jj) + (k3plus*GBPCprime(jj)*(1 - MCORprime(jj)) -...
-        k3minus*MCORprime(jj)*MHCKAprime(jj))*deltaT;
-     % eq (RASB)
-     RasBprime(jj+1) = RasBprime(jj) + (k4plus*GBG(jj)*(1 - RasBprime(jj)) - ...
-         k4minus*RasBprime(jj))*deltaT; 
-     %eq (XMCHKA)
-     MHCKAprime(jj+1) = MHCKAprime(jj) + (k5plus*MHCKAprime(jj)*...
-        (RasBprime(jj)+ k_0)*(1 - MHCKAprime(jj))...
-          - k5minus*MHCKAprime(jj))*deltaT;  
-end  
-
-% Solutions Vector
-Y = [GBPCprime MCORprime RasBprime MHCKAprime];
+    for jj = 1:length(tspan) - 1   
+         %eq (GBPC)
+         GBPCprime(jj+1) =  GBPCprime(jj) + (k2plus*GBGSS*(1 - GBPCprime(jj)) ...
+             - k2minus*GBPCprime(jj))*deltaT;
+         %eq (XMCOR)
+         MCORprime(jj+1) =  MCORprime(jj) + (k3plus*GBPCprime(jj)*(1 - MCORprime(jj)) -...
+            k3minus*MCORprime(jj)*MHCKAprime(jj))*deltaT;
+         % eq (RASB)
+         RasBprime(jj+1) = RasBprime(jj) + (k4plus*GBG(jj)*(1 - RasBprime(jj)) - ...
+             k4minus*RasBprime(jj))*deltaT; 
+         %eq (XMCHKA)
+         MHCKAprime(jj+1) = MHCKAprime(jj) + (k5plus*MHCKAprime(jj)*...
+            (RasBprime(jj)+ k_0)*(1 - MHCKAprime(jj))...
+              - k5minus*MHCKAprime(jj))*deltaT;  
+    end  
+    
+    % Solutions Vector
+    Y = [GBPCprime MCORprime RasBprime MHCKAprime];
 end
 
